@@ -1,0 +1,35 @@
+using System.Collections;
+using System;
+using System.Text;
+namespace lessons
+{
+    class program
+    {
+        static void Main()
+        {
+            Random rand = new Random();
+            int number = rand.Next(0, 101);
+            Console.WriteLine($"Наше случайное число: {number}");
+            int comparedNumber = 0;
+            int multipleThree = 3;
+            int multipleFive = 5;
+            int remainderDivision3;
+            int remainderDivision5;
+            int totalNumber = number;
+
+            while (comparedNumber < number)
+            {
+                comparedNumber += 1;
+                remainderDivision3 = comparedNumber%multipleThree;
+                remainderDivision5 = comparedNumber%multipleFive;
+                if (remainderDivision3 == 0 || remainderDivision5 == 0)
+                {
+                    Console.WriteLine(comparedNumber);
+                    totalNumber += comparedNumber;
+                }
+            }
+
+            Console.WriteLine(totalNumber);
+        }
+    }
+}
