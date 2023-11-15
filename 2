@@ -1,0 +1,23 @@
+using System.Collections;
+using System;
+using System.Text;
+namespace lessons
+{
+    class program
+    {
+        static void Main()
+        {
+            string exitMessage = "exit";
+            
+            while (true)
+            {
+                Console.Write("Введите текст: ");
+                string userMessage = Console.ReadLine();
+                if (userMessage == "exit")
+                {
+                    break;
+                }
+            }
+        }
+    }
+}
