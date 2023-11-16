@@ -11,11 +11,11 @@ namespace lessons
             int multipleThree = 3;
             int multipleFive = 5;
             int minimumRandomValue = 0;
-            int maximumRandomValue = 101;
+            int maximumRandomValue = 10;
             Random random = new Random();
             int number = random.Next(minimumRandomValue, maximumRandomValue);
             Console.WriteLine($"Наше случайное число: {number}");
-            int totalNumber = number;
+            int sumMultiples = 0;
 
             for (int i = 0; i < number; i++)
             {
@@ -24,10 +24,11 @@ namespace lessons
                 if (comparedNumber % multipleThree == 0 || comparedNumber % multipleFive == 0)
                 {
                     Console.WriteLine(comparedNumber);
-                    totalNumber += comparedNumber;
+                    sumMultiples += comparedNumber;
                 }
             }
 
+            int totalNumber = number + sumMultiples;
             Console.WriteLine(totalNumber);
         }
     }
