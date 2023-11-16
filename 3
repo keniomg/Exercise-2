@@ -7,16 +7,17 @@ namespace lessons
     {
         static void Main()
         {
-            int num0 = 5;         
-            int num1 = 12;
-            int deltaNum = num1 - num0;
-            int cycleLength = 13;
-            Console.WriteLine(num0);
+            int firstSequenceNumber = 5;         
+            int secondSequenceNumber = 12;
+            int deltaNum = secondSequenceNumber - firstSequenceNumber;
+            int lastSequenceNumber = 96;
+            int nextSequenceNumber = 0;
+            Console.WriteLine(firstSequenceNumber);
 
-            for (int i = 0; i < cycleLength; i++)
+            while (nextSequenceNumber < lastSequenceNumber)
             {
-                num0 += deltaNum;
-                Console.WriteLine(num0);
+                nextSequenceNumber = firstSequenceNumber += deltaNum;
+                Console.WriteLine(nextSequenceNumber);
             }
         }
     }
