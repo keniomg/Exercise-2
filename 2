@@ -8,15 +8,11 @@ namespace lessons
         static void Main()
         {
             string exitMessage = "exit";
-            
-            while (true)
+            Console.Write("Введите текст: ");
+
+            while (Console.ReadLine() != exitMessage)
             {
                 Console.Write("Введите текст: ");
-                string userMessage = Console.ReadLine();
-                if (userMessage == "exit")
-                {
-                    break;
-                }
             }
         }
     }
