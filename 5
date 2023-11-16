@@ -1,0 +1,120 @@
+using System;
+namespace lessons
+{
+    class program
+    {
+        static void Main()
+        {
+            const string CommandExit = "exit";
+            const string CommandOne = "1";
+            const string CommandTwo = "2";
+            const string CommandThree = "3";
+            const string CommandFour = "4";
+
+            string userCommand;
+            string exchangeEnterCommand = "Обмен валюты";
+            string exchangeRateCommand = "Узнать курс обмена";
+            string exitMessage = $"Для выхода из программы введите '{CommandExit}' в любой момент";
+            float fullPercent = 100f;
+            float comissionPercent = 7.3f;
+            float exchangePercent = (fullPercent - comissionPercent) / 100;
+            float dollar = 100.65f;
+            float euro = 110.13f;
+            float ruble = 1f;
+            float dollarToRuble = dollar / ruble * exchangePercent;
+            float dollarToEuro = dollar / euro * exchangePercent;
+            float euroToRuble = euro / ruble * exchangePercent;
+            float euroToDollar = euro / dollar * exchangePercent;
+            float rubleToDollar = ruble / dollar * exchangePercent;
+            float rubleToEuro = ruble / euro * exchangePercent;
+            Console.WriteLine($"Приветствуем вас в нашем валютообменнике.\nЧтобы продолжить, нажмите 'Enter'\n{exitMessage}\n");
+
+            while (Console.ReadLine() != CommandExit)
+            {
+                
+                Console.WriteLine("\nСколько у вас рублей?:\n");
+                string rubleInput = Console.ReadLine();
+
+                if (Convert.ToString(rubleInput) == CommandExit)
+                {
+                    Console.WriteLine();
+                    break;
+                }
+
+                float rubleBalance = Convert.ToSingle(rubleInput);
+                Console.WriteLine("\nСколько у вас долларов?:\n");
+                string dollarInput = Console.ReadLine();
+
+                if (Convert.ToString(dollarInput) == CommandExit)
+                {
+                    Console.WriteLine();
+                    break;
+                }
+
+                float dollarBalance = Convert.ToSingle(dollarInput);
+                Console.WriteLine("\nСколько у вас евро?:\n");
+                string euroInput = Console.ReadLine();
+
+                if (Convert.ToString(euroInput) == CommandExit)
+                {
+                    Console.WriteLine();
+                    break;
+                }
+
+                float euroBalance = Convert.ToSingle(euroInput);
+                Console.WriteLine($"\nВ вашем кошельке:\n \nрублей: {rubleBalance}, \nдолларов: {dollarBalance},\nевро: {euroBalance}");
+                Console.WriteLine($"\nВы можете выполнить одну из следующих операций.\n1 - {exchangeEnterCommand}\n2 - {exchangeRateCommand}\n");
+                userCommand = Console.ReadLine();
+
+                if (userCommand == CommandExit)
+                {
+                    Console.WriteLine();
+                    break;
+                }
+
+                while (userCommand != CommandOne && userCommand != CommandTwo && userCommand != CommandExit)
+                {
+                    Console.WriteLine("\nВведите номер операции корректно или выйдите из программы\n");
+                    userCommand = Console.ReadLine();
+
+                    if (userCommand == CommandExit || userCommand == CommandOne || userCommand == CommandTwo)
+                    {
+                        break;
+                    }
+                }
+
+                if (userCommand == "1")
+                {
+                    Console.WriteLine($"\nКакую валюту вы хотите обменять?\n{CommandOne} - рубли\n{CommandTwo} - доллары\n{CommandThree} - евро\n");
+                    userCommand = Console.ReadLine();
+
+                    if (Convert.ToString(euroInput) == CommandExit)
+                    {
+                        Console.WriteLine();
+                        break;
+                    }
+
+                    switch (userCommand)
+                    {
+                        case "1":
+                            Console.WriteLine($"\nНа какую валюту вы хотите обменять рубли?\n{CommandOne} - на доллары\n{CommandTwo} - на евро\n");
+                            userCommand = Console.ReadLine();
+                            if (userCommand == CommandOne)
+                            {
+                                Console.WriteLine("Сколько рублей вы хотите обменять на доллары?:\n");
+
+                            }
+                            break;
+
+                        case "2":
+                            Console.WriteLine("loh");
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+    }
+}
