@@ -7,22 +7,21 @@ namespace lessons
     {
         static void Main()
         {
-            Random rand = new Random();
-            int number = rand.Next(0, 101);
-            Console.WriteLine($"Наше случайное число: {number}");
             int comparedNumber = 0;
             int multipleThree = 3;
             int multipleFive = 5;
-            int remainderDivision3;
-            int remainderDivision5;
+            int minimumRandomValue = 0;
+            int maximumRandomValue = 101;
+            Random random = new Random();
+            int number = random.Next(minimumRandomValue, maximumRandomValue);
+            Console.WriteLine($"Наше случайное число: {number}");
             int totalNumber = number;
 
-            while (comparedNumber < number)
+            for (int i = 0; i < number; i++)
             {
                 comparedNumber += 1;
-                remainderDivision3 = comparedNumber%multipleThree;
-                remainderDivision5 = comparedNumber%multipleFive;
-                if (remainderDivision3 == 0 || remainderDivision5 == 0)
+
+                if (comparedNumber % multipleThree == 0 || comparedNumber % multipleFive == 0)
                 {
                     Console.WriteLine(comparedNumber);
                     totalNumber += comparedNumber;
