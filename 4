@@ -7,24 +7,23 @@ namespace lessons
     {
         static void Main()
         {
-            int comparedNumber = 0;
-            int multipleThree = 3;
-            int multipleFive = 5;
+            int firstDivisor = 3;
+            int secondDivisor = 5;
             int minimumRandomValue = 0;
-            int maximumRandomValue = 10;
+            int maximumRandomValue = 12;
             Random random = new Random();
             int number = random.Next(minimumRandomValue, maximumRandomValue);
             Console.WriteLine($"Наше случайное число: {number}");
             int sumMultiples = 0;
 
-            for (int i = 0; i < number; i++)
+            for (int i = 0; i <= number; i++)
             {
-                comparedNumber += 1;
+                i += 1;
 
-                if (comparedNumber % multipleThree == 0 || comparedNumber % multipleFive == 0)
+                if (i % firstDivisor == 0 || i % secondDivisor == 0)
                 {
-                    Console.WriteLine(comparedNumber);
-                    sumMultiples += comparedNumber;
+                    Console.WriteLine(i);
+                    sumMultiples += i;
                 }
             }
 
