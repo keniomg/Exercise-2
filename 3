@@ -11,13 +11,10 @@ namespace lessons
             int secondNumber = 12;
             int deltaNumber = secondNumber - firstNumber;
             int lastNumber = 96;
-            int nextNumber = 0;
-            Console.WriteLine(firstNumber);
 
-            for (int i = 5;  i < lastNumber; i+=7)
+            for (int i = firstNumber; i <= lastNumber; i += deltaNumber)
             {
-                nextNumber = firstNumber += deltaNumber;
-                Console.WriteLine(nextNumber);
+                Console.WriteLine(i);
             }
         }
     }
