@@ -9,11 +9,10 @@ namespace lessons
             const string FirstCommand = "1";
             const string SecondCommand = "2";
             const string ThirdCommand = "3";
-            const string FourthCommand = "4";
 
-            string userCommand;
             string exchangeEnterCommand = "Обмен валюты";
             string exchangeRateCommand = "Узнать курс обмена";
+            string balanceInfoCommand = "Узнать баланс";
             string exitMessage = $"Для выхода из программы введите '{CommandExit}' в любой момент";
             float fullPercent = 100f;
             float comissionPercent = 7.3f;
@@ -21,6 +20,16 @@ namespace lessons
             float dollar = 100.65f;
             float euro = 110.13f;
             float ruble = 1f;
+            string userCommand;
+            float rubleBalance;
+            float dollarBalance;
+            float euroBalance;
+            string rubleToExchange;
+            float rubleToExchangeAmount;
+            string dollarToExchange;
+            float dollarToExchangeAmount;
+            string euroToExchange;
+            float euroToExchangeAmount;
             float dollarToRuble = dollar / ruble * exchangePercent;
             float dollarToEuro = dollar / euro * exchangePercent;
             float euroToRuble = euro / ruble * exchangePercent;
@@ -31,7 +40,7 @@ namespace lessons
             Console.WriteLine("\nСколько у вас рублей?:\n");
             string rubleInput = Console.ReadLine();
 
-            while (!float.TryParse(rubleInput, out float _))
+            while (!float.TryParse(rubleInput, out rubleBalance))
             {
                 if (rubleInput == CommandExit)
                 {
@@ -42,11 +51,10 @@ namespace lessons
                 rubleInput = Console.ReadLine();
             }
 
-            float rubleBalance = Convert.ToSingle(rubleInput);
             Console.WriteLine("\nСколько у вас долларов?:\n");
             string dollarInput = Console.ReadLine();
 
-            while (!float.TryParse(dollarInput, out float _))
+            while (!float.TryParse(dollarInput, out dollarBalance))
             {
                 if (dollarInput == CommandExit)
                 {
@@ -57,11 +65,10 @@ namespace lessons
                 dollarInput = Console.ReadLine();
             }
 
-            float dollarBalance = Convert.ToSingle(dollarInput);
             Console.WriteLine("\nСколько у вас евро?:\n");
             string euroInput = Console.ReadLine();
 
-            while (!float.TryParse(euroInput, out float _))
+            while (!float.TryParse(euroInput, out euroBalance))
             {
                 if (euroInput == CommandExit)
                 {
@@ -72,27 +79,19 @@ namespace lessons
                 euroInput = Console.ReadLine();
             }
 
-            float euroBalance = Convert.ToSingle(euroInput);
-            Console.WriteLine($"\nВ вашем кошельке:\n \nрублей: {rubleBalance} \nдолларов: {dollarBalance}\nевро: {euroBalance}");
-            Console.WriteLine($"\nВы можете выполнить одну из следующих операций.\n1 - {exchangeEnterCommand}\n2 - {exchangeRateCommand}\n");
+            Console.WriteLine($"\nВы можете выполнить одну из следующих операций.\n{FirstCommand} - {exchangeEnterCommand}\n{SecondCommand} - {exchangeRateCommand}\n{ThirdCommand} - {balanceInfoCommand}\n");
 
             while ((userCommand = Console.ReadLine()) != CommandExit)
             {
-
-                if (userCommand == CommandExit)
+                while (userCommand != FirstCommand && userCommand != SecondCommand && userCommand != ThirdCommand)
                 {
-                    break;
-                }
-
-                while (userCommand != FirstCommand && userCommand != SecondCommand && userCommand != CommandExit)
-                {
-                    Console.WriteLine("\nВведите номер операции корректно или выйдите из программы\n");
-                    userCommand = Console.ReadLine();
-
-                    if (userCommand == CommandExit || userCommand == FirstCommand || userCommand == SecondCommand)
+                    if (userCommand == CommandExit)
                     {
-                        break;
+                        return;
                     }
+
+                    Console.WriteLine("\nВведите номер команды корректно или выйдите из программы\n");
+                    userCommand = Console.ReadLine();
                 }
 
                 if (userCommand == FirstCommand)
@@ -100,21 +99,15 @@ namespace lessons
                     Console.WriteLine($"\nКакую валюту вы хотите обменять?\n{FirstCommand} - рубли\n{SecondCommand} - доллары\n{ThirdCommand} - евро\n");
                     userCommand = Console.ReadLine();
 
-                    if (Convert.ToString(userCommand) == CommandExit)
+                    while (userCommand != FirstCommand && userCommand != SecondCommand && userCommand != ThirdCommand)
                     {
-                        Console.WriteLine();
-                        break;
-                    }
-
-                    while (userCommand != FirstCommand && userCommand != SecondCommand && userCommand != CommandExit)
-                    {
-                        Console.WriteLine("\nВведите номер операции корректно или выйдите из программы\n");
-                        userCommand = Console.ReadLine();
-
-                        if (userCommand == CommandExit || userCommand == FirstCommand || userCommand == SecondCommand)
+                        if (userCommand == CommandExit)
                         {
-                            break;
+                            return;
                         }
+
+                        Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                        userCommand = Console.ReadLine();
                     }
 
                     switch (userCommand)
@@ -123,25 +116,193 @@ namespace lessons
                             Console.WriteLine($"\nНа какую валюту вы хотите обменять рубли?\n{FirstCommand} - на доллары\n{SecondCommand} - на евро\n");
                             userCommand = Console.ReadLine();
 
-                            if (Convert.ToString(userCommand) == CommandExit)
+                            while (userCommand != FirstCommand && userCommand != SecondCommand)
                             {
-                                return;
+                                if (userCommand == CommandExit)
+                                {
+                                    return;
+                                }
+
+                                Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                                userCommand = Console.ReadLine();
                             }
 
                             if (userCommand == FirstCommand)
                             {
-                                Console.WriteLine("Сколько рублей вы хотите обменять на доллары?:\n");
+                                Console.WriteLine("\nСколько рублей вы хотите обменять на доллары?:\n");
+                                rubleToExchange = Console.ReadLine();
+
+                                while (!float.TryParse(rubleToExchange, out rubleToExchangeAmount))
+                                {
+                                    if (rubleToExchange == CommandExit)
+                                    {
+                                        return;
+                                    }
+
+                                    Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                                    rubleToExchange = Console.ReadLine();
+                                }
+
+                                rubleBalance -= rubleToExchangeAmount;
+                                dollarBalance += (rubleToExchangeAmount * rubleToDollar);
+                                Console.WriteLine($"\nТеперь на вашем балансе \nрублей: {rubleBalance}\nдолларов: {dollarBalance}");
+                            }
+
+                            if (userCommand == SecondCommand)
+                            {
+                                Console.WriteLine("\nСколько рублей вы хотите обменять на евро?:\n");
+                                rubleToExchange = Console.ReadLine();
+
+                                while (!float.TryParse(rubleToExchange, out rubleToExchangeAmount))
+                                {
+                                    if (rubleToExchange == CommandExit)
+                                    {
+                                        return;
+                                    }
+
+                                    Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                                    rubleToExchange = Console.ReadLine();
+                                }
+
+                                rubleBalance -= rubleToExchangeAmount;
+                                euroBalance += (rubleToExchangeAmount * rubleToEuro);
+                                Console.WriteLine($"\nТеперь на вашем балансе \nрублей: {rubleBalance}\nевро: {euroBalance}");
                             }
 
                             break;
 
                         case SecondCommand:
-                            Console.WriteLine("loh");
+                            Console.WriteLine($"\nНа какую валюту вы хотите обменять доллары?\n{FirstCommand} - на рубли\n{SecondCommand} - на евро\n");
+                            userCommand = Console.ReadLine();
+
+                            while (userCommand != FirstCommand && userCommand != SecondCommand)
+                            {
+                                if (userCommand == CommandExit)
+                                {
+                                    return;
+                                }
+
+                                Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                                userCommand = Console.ReadLine();
+                            }
+
+                            if (userCommand == FirstCommand)
+                            {
+                                Console.WriteLine("\nСколько долларов вы хотите обменять на рубли?:\n");
+                                dollarToExchange = Console.ReadLine();
+
+                                while (!float.TryParse(dollarToExchange, out dollarToExchangeAmount))
+                                {
+                                    if (dollarToExchange == CommandExit)
+                                    {
+                                        return;
+                                    }
+
+                                    Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                                    dollarToExchange = Console.ReadLine();
+                                }
+
+                                dollarBalance -= dollarToExchangeAmount;
+                                rubleBalance += (dollarToExchangeAmount * dollarToRuble);
+                                Console.WriteLine($"\nТеперь на вашем балансе \nдолларов: {dollarBalance}\nрублей: {rubleBalance}");
+                            }
+
+                            if (userCommand == SecondCommand)
+                            {
+                                Console.WriteLine("\nСколько долларов вы хотите обменять на евро?:\n");
+                                dollarToExchange = Console.ReadLine();
+
+                                while (!float.TryParse(dollarToExchange, out dollarToExchangeAmount))
+                                {
+                                    if (dollarToExchange == CommandExit)
+                                    {
+                                        return;
+                                    }
+
+                                    Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                                    dollarToExchange = Console.ReadLine();
+                                }
+
+                                dollarBalance -= dollarToExchangeAmount;
+                                euroBalance += (dollarToExchangeAmount * dollarToEuro);
+                                Console.WriteLine($"\nТеперь на вашем балансе \nдолларов: {dollarBalance}\nевро: {euroBalance}");
+                            }
+
                             break;
 
-                        default:
+                        case ThirdCommand:
+                            Console.WriteLine($"\nНа какую валюту вы хотите обменять евро?\n{FirstCommand} - на рубли\n{SecondCommand} - на доллары\n");
+                            userCommand = Console.ReadLine();
+
+                            while (userCommand != FirstCommand && userCommand != SecondCommand)
+                            {
+                                if (userCommand == CommandExit)
+                                {
+                                    return;
+                                }
+
+                                Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                                userCommand = Console.ReadLine();
+                            }
+
+                            if (userCommand == FirstCommand)
+                            {
+                                Console.WriteLine("\nСколько евро вы хотите обменять на рубли?:\n");
+                                euroToExchange = Console.ReadLine();
+
+                                while (!float.TryParse(euroToExchange, out euroToExchangeAmount))
+                                {
+                                    if (euroToExchange == CommandExit)
+                                    {
+                                        return;
+                                    }
+
+                                    Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                                    euroToExchange = Console.ReadLine();
+                                }
+
+                                euroBalance -= euroToExchangeAmount;
+                                rubleBalance += (euroToExchangeAmount * euroToRuble);
+                                Console.WriteLine($"\nТеперь на вашем балансе \nевро: {euroBalance}\nрублей: {rubleBalance}");
+                            }
+
+                            if (userCommand == SecondCommand)
+                            {
+                                Console.WriteLine("\nСколько евро вы хотите обменять на доллары?:\n");
+                                euroToExchange = Console.ReadLine();
+
+                                while (!float.TryParse(euroToExchange, out euroToExchangeAmount))
+                                {
+                                    if (euroToExchange == CommandExit)
+                                    {
+                                        return;
+                                    }
+
+                                    Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
+                                    euroToExchange = Console.ReadLine();
+                                }
+
+                                euroBalance -= euroToExchangeAmount;
+                                dollarBalance += (euroToExchangeAmount * euroToDollar);
+                                Console.WriteLine($"\nТеперь на вашем балансе \nевро: {euroBalance}\nдолларов: {dollarBalance}");
+                            }
+
                             break;
                     }
+
+                    Console.WriteLine($"\nВы можете выполнить одну из следующих операций.\n{FirstCommand} - {exchangeEnterCommand}\n{SecondCommand} - {exchangeRateCommand}\n{ThirdCommand} - {balanceInfoCommand}\n");
+                }
+
+                else if (userCommand == SecondCommand)
+                {
+                    Console.WriteLine($"\nТекущий курс обмена:\n1 рубль = \nдолларов: {rubleToDollar}\nевро: {rubleToEuro}\n\n1 доллар = \nрублей: {dollarToRuble}\nевро: {dollarToEuro}\n\n1 евро = \nдолларов: {euroToDollar}\nрублей: {euroToRuble}\n");
+                    Console.WriteLine($"\nВы можете выполнить одну из следующих операций.\n{FirstCommand} - {exchangeEnterCommand}\n{SecondCommand} - {exchangeRateCommand}\n{ThirdCommand} - {balanceInfoCommand}\n");
+                }
+
+                else if (userCommand == ThirdCommand)
+                {
+                    Console.WriteLine($"\nВ вашем кошельке:\n \nрублей: {rubleBalance} \nдолларов: {dollarBalance}\nевро: {euroBalance}");
+                    Console.WriteLine($"\nВы можете выполнить одну из следующих операций.\n{FirstCommand} - {exchangeEnterCommand}\n{SecondCommand} - {exchangeRateCommand}\n{ThirdCommand} - {balanceInfoCommand}\n");
                 }
             }
         }
