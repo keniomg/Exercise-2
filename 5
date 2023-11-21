@@ -113,11 +113,6 @@ namespace lessons
 
                                 while (float.TryParse(rubleToExchange, out rubleToExchangeAmount) == false && rubleToExchange != CommandExit)
                                 {
-                                    if (rubleToExchange == CommandExit)
-                                    {
-                                        return;
-                                    }
-
                                     Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
                                     rubleToExchange = Console.ReadLine();
                                 }
@@ -132,13 +127,8 @@ namespace lessons
                                 Console.WriteLine("\nСколько рублей вы хотите обменять на евро?:\n");
                                 rubleToExchange = Console.ReadLine();
 
-                                while (float.TryParse(rubleToExchange, out rubleToExchangeAmount) == false)
+                                while (float.TryParse(rubleToExchange, out rubleToExchangeAmount) == false && rubleToExchange != CommandExit)
                                 {
-                                    if (rubleToExchange == CommandExit)
-                                    {
-                                        return;
-                                    }
-
                                     Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
                                     rubleToExchange = Console.ReadLine();
                                 }
@@ -153,13 +143,8 @@ namespace lessons
                                 Console.WriteLine("\nСколько долларов вы хотите обменять на рубли?:\n");
                                 dollarToExchange = Console.ReadLine();
 
-                                while (float.TryParse(dollarToExchange, out dollarToExchangeAmount) == false)
+                                while (float.TryParse(dollarToExchange, out dollarToExchangeAmount) == false && dollarToExchange != CommandExit)
                                 {
-                                    if (dollarToExchange == CommandExit)
-                                    {
-                                        return;
-                                    }
-
                                     Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
                                     dollarToExchange = Console.ReadLine();
                                 }
@@ -174,13 +159,8 @@ namespace lessons
                                 Console.WriteLine("\nСколько долларов вы хотите обменять на евро?:\n");
                                 dollarToExchange = Console.ReadLine();
 
-                                while (float.TryParse(dollarToExchange, out dollarToExchangeAmount) == false)
+                                while (float.TryParse(dollarToExchange, out dollarToExchangeAmount) == false && dollarToExchange != CommandExit)
                                 {
-                                    if (dollarToExchange == CommandExit)
-                                    {
-                                        return;
-                                    }
-
                                     Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
                                     dollarToExchange = Console.ReadLine();
                                 }
@@ -195,13 +175,8 @@ namespace lessons
                                 Console.WriteLine("\nСколько евро вы хотите обменять на рубли?:\n");
                                 euroToExchange = Console.ReadLine();
 
-                                while (float.TryParse(euroToExchange, out euroToExchangeAmount) == false)
+                                while (float.TryParse(euroToExchange, out euroToExchangeAmount) == false && euroToExchange != CommandExit)
                                 {
-                                    if (euroToExchange == CommandExit)
-                                    {
-                                        return;
-                                    }
-
                                     Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
                                     euroToExchange = Console.ReadLine();
                                 }
@@ -216,13 +191,8 @@ namespace lessons
                                 Console.WriteLine("\nСколько евро вы хотите обменять на рубли?:\n");
                                 euroToExchange = Console.ReadLine();
 
-                                while (float.TryParse(euroToExchange, out euroToExchangeAmount) == false)
+                                while (float.TryParse(euroToExchange, out euroToExchangeAmount) == false && euroToExchange != CommandExit)
                                 {
-                                    if (euroToExchange == CommandExit)
-                                    {
-                                        return;
-                                    }
-
                                     Console.WriteLine("\nВведите число корректно или выйдите из программы\n");
                                     euroToExchange = Console.ReadLine();
                                 }
