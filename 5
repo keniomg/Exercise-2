@@ -92,6 +92,7 @@ namespace lessons
             {
                 if (float.TryParse(userCommand, out _) == true)
                 {
+                    Console.Clear();
                     Console.WriteLine($"Вы можете выполнить одну из следующих операций:\n\n{ExchangeEnterCommand} - {exchangeEnter}\n" +
                         $"{ExchangeRateCommand} - {exchangeRate}\n{BalanceInfoCommand} - {balanceInfo}\n");
                 }
@@ -141,16 +142,11 @@ namespace lessons
 
                                 rubleBalance -= rubleToExchangeAmount;
                                 dollarBalance += (rubleToExchangeAmount * rubleToDollar);
-
-                                if (isWorking)
-                                {
-                                    Console.WriteLine($"\nТеперь на вашем балансе \nрублей: {rubleBalance}\nдолларов: {dollarBalance}\n");
-                                }
-
                                 break;
 
                             case CommandConvertRubToEuro:
-                                Console.WriteLine("\nСколько рублей вы хотите обменять на евро?:\n");
+                                Console.Clear();
+                                Console.WriteLine("Сколько рублей вы хотите обменять на евро?:\n");
                                 rubleToExchange = Console.ReadLine();
 
                                 while (float.TryParse(rubleToExchange, out rubleToExchangeAmount) == false || rubleToExchange == CommandExit)
@@ -171,16 +167,11 @@ namespace lessons
 
                                 rubleBalance -= rubleToExchangeAmount;
                                 euroBalance += (rubleToExchangeAmount * rubleToEuro);
-
-                                if (isWorking)
-                                {
-                                    Console.WriteLine($"\nТеперь на вашем балансе \nрублей: {rubleBalance}\nевро: {euroBalance}\n");
-                                }
-
                                 break;
 
                             case CommandConvertUsdToRub:
-                                Console.WriteLine("\nСколько долларов вы хотите обменять на рубли?:\n");
+                                Console.Clear();
+                                Console.WriteLine("Сколько долларов вы хотите обменять на рубли?:\n");
                                 dollarToExchange = Console.ReadLine();
 
                                 while (float.TryParse(dollarToExchange, out dollarToExchangeAmount) == false || rubleToExchange == CommandExit)
@@ -201,16 +192,11 @@ namespace lessons
 
                                 dollarBalance -= dollarToExchangeAmount;
                                 rubleBalance += (dollarToExchangeAmount * dollarToRuble);
-
-                                if (isWorking)
-                                {
-                                    Console.WriteLine($"\nТеперь на вашем балансе \nдолларов: {dollarBalance}\nрублей: {rubleBalance}\n");
-                                }
-
                                 break;
 
                             case CommandConvertUsdToEuro:
-                                Console.WriteLine("\nСколько долларов вы хотите обменять на евро?:\n");
+                                Console.Clear();
+                                Console.WriteLine("Сколько долларов вы хотите обменять на евро?:\n");
                                 dollarToExchange = Console.ReadLine();
 
                                 while (float.TryParse(dollarToExchange, out dollarToExchangeAmount) == false || rubleToExchange == CommandExit)
@@ -231,16 +217,11 @@ namespace lessons
 
                                 dollarBalance -= dollarToExchangeAmount;
                                 euroBalance += (dollarToExchangeAmount * dollarToEuro);
-                                
-                                if (isWorking)
-                                {
-                                    Console.WriteLine($"\nТеперь на вашем балансе \nдолларов: {dollarBalance}\nевро: {euroBalance} \n");
-                                }
-
                                 break;
 
                             case CommandConvertEuroToRub:
-                                Console.WriteLine("\nСколько евро вы хотите обменять на рубли?:\n");
+                                Console.Clear();
+                                Console.WriteLine("Сколько евро вы хотите обменять на рубли?:\n");
                                 euroToExchange = Console.ReadLine();
 
                                 while (float.TryParse(euroToExchange, out euroToExchangeAmount) == false || rubleToExchange == CommandExit)
@@ -261,16 +242,11 @@ namespace lessons
 
                                 euroBalance -= euroToExchangeAmount;
                                 rubleBalance += (euroToExchangeAmount * euroToRuble);
-
-                                if (isWorking)
-                                {
-                                    Console.WriteLine($"\nТеперь на вашем балансе \nевро: {euroBalance}\nрублей: {rubleBalance} \n");
-                                }
-
                                 break;
 
                             case CommandConvertEuroToUsd:
-                                Console.WriteLine("\nСколько евро вы хотите обменять на рубли?:\n");
+                                Console.Clear();
+                                Console.WriteLine("Сколько евро вы хотите обменять на рубли?:\n");
                                 euroToExchange = Console.ReadLine();
 
                                 while (float.TryParse(euroToExchange, out euroToExchangeAmount) == false || rubleToExchange == CommandExit)
@@ -291,12 +267,6 @@ namespace lessons
 
                                 euroBalance -= euroToExchangeAmount;
                                 dollarBalance += (euroToExchangeAmount * euroToDollar);
-
-                                if (isWorking)
-                                {
-                                    Console.WriteLine($"\nТеперь на вашем балансе \nевро: {euroBalance}\nдолларов: {dollarBalance} \n");
-                                }
-
                                 break;
 
                             case CommandExit:
@@ -307,6 +277,13 @@ namespace lessons
                                 Console.WriteLine("\nВведите корректный вариант обмена или выйдите из программы\n");
                                 break;
                         }
+
+                        if (isWorking)
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"Теперь в вашем кошельке:\n \nрублей: {rubleBalance} \nдолларов: {dollarBalance}\nевро: {euroBalance}");
+                        }
+                        
                     }
                     else if (userCommand == ExchangeRateCommand)
                     {
