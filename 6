@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp11
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            const string ProgramGuessUserNumberCommand = "1";
+            const string RepeatMessageCommand = "2";
+            const string MixMessageCommand = "3";
+            const string UserGuessProgramNumberCommand = "4";
+            const string ClearConsoleCommand = "clear";
+            const string InfoCommand = "info";
+            const string ExitCommand = "exit";
+
+            bool isWorking = true;
+            int coins = 3;
+            int programNumber = 0;
+            int userNumber = 0;
+
+            string userMessage = null;
+            string userInput = null;
+            
+
+            while (userInput != ExitCommand)
+            {
+                if (isWorking)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"Вы можете выполнить одну из следующих команд, введя соответствующее число:\n{ProgramGuessUserNumberCommand} - загадать число программе" +
+                        $"\n{RepeatMessageCommand} - повторить введённое сообщение случайное число раз\n{MixMessageCommand} - перемешать введённое сообщение" +
+                        $"\n{UserGuessProgramNumberCommand} - программа загадывает число вам\n\n\nТакже в любой момент введя в консоль соответствующее число, вы можете:\n" +
+                        $"\n{InfoCommand} - узнать подробнее о работе программы\n{ClearConsoleCommand} - очистить консоль\n{ExitCommand} - выйти из программы\n");
+                }
+
+                userInput = Console.ReadLine();
+                Console.WriteLine();
+
+                if (userInput == ProgramGuessUserNumberCommand)
+                {
+
+                }
+            }
+        }
+    }
+}
