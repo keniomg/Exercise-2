@@ -107,7 +107,7 @@ namespace lessons
                                 Console.WriteLine("Сколько рублей вы хотите обменять на доллары?:\n");
                                 userCommand = Console.ReadLine();
 
-                                if (float.TryParse(userCommand, out rubleToExchange) == true)
+                                if (float.TryParse(userCommand, out rubleToExchange) == true && rubleToExchange <= rubleBalance)
                                 {
                                     rubleBalance -= rubleToExchange;
                                     dollarBalance += rubleToExchange * rubleToDollar;
@@ -119,7 +119,7 @@ namespace lessons
                                 Console.WriteLine("Сколько рублей вы хотите обменять на евро?:\n");
                                 userCommand = Console.ReadLine();
 
-                                if (float.TryParse(userCommand, out rubleToExchange) == true)
+                                if (float.TryParse(userCommand, out rubleToExchange ) == true && rubleToExchange <= rubleBalance)
                                 {
                                     rubleBalance -= rubleToExchange;
                                     euroBalance += rubleToExchange * rubleToEuro;
@@ -131,7 +131,7 @@ namespace lessons
                                 Console.WriteLine("Сколько долларов вы хотите обменять на рубли?:\n");
                                 userCommand = Console.ReadLine();
 
-                                if (float.TryParse(userCommand, out dollarToExchange) == true)
+                                if (float.TryParse(userCommand, out dollarToExchange) == true && dollarToExchange <= dollarBalance)
                                 {
                                     dollarBalance -= dollarToExchange;
                                     rubleBalance += dollarToExchange * dollarToRuble;
@@ -143,7 +143,7 @@ namespace lessons
                                 Console.WriteLine("Сколько долларов вы хотите обменять на евро?:\n");
                                 userCommand = Console.ReadLine();
 
-                                if (float.TryParse(userCommand, out dollarToExchange) == true)
+                                if (float.TryParse(userCommand, out dollarToExchange) == true && dollarToExchange <= dollarBalance)
                                 {
                                     dollarBalance -= dollarToExchange;
                                     euroBalance += dollarToExchange * dollarToEuro;
@@ -155,7 +155,7 @@ namespace lessons
                                 Console.WriteLine("Сколько евро вы хотите обменять на рубли?:\n");
                                 userCommand = Console.ReadLine();
 
-                                if (float.TryParse(userCommand, out euroToExchange) == true)
+                                if (float.TryParse(userCommand, out euroToExchange) == true && euroToExchange <= euroBalance)
                                 {
                                     euroBalance -= euroToExchange;
                                     rubleBalance += euroToExchange * euroToRuble;
@@ -164,10 +164,10 @@ namespace lessons
 
                             case ConvertEuroToUsdCommand:
                                 Console.Clear();
-                                Console.WriteLine("Сколько евро вы хотите обменять на рубли?:\n");
+                                Console.WriteLine("Сколько евро вы хотите обменять на доллары?:\n");
                                 userCommand = Console.ReadLine();
 
-                                if (float.TryParse(userCommand, out euroToExchange) == true)
+                                if (float.TryParse(userCommand, out euroToExchange) == true && euroToExchange <= euroBalance)
                                 {
                                     euroBalance -= euroToExchange;
                                     dollarBalance += euroToExchange * euroToDollar;
@@ -212,6 +212,7 @@ namespace lessons
                         break;
 
                     default:
+                        Console.WriteLine("Введена неверная команда.");
                         break;
                 }
 
