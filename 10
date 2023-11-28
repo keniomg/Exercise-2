@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp16
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            const int MinRandomValue = 0;
+            const int MaxRandomValue = 100;
+            const int NumberToDegree = 2;
+
+            bool isContinue = true;
+            Random randomNumber = new Random();
+            int comparedNumber = randomNumber.Next(MinRandomValue, MaxRandomValue);
+            Console.WriteLine($"Наше случайное число: {comparedNumber}\n");
+            int numberInDegree = 2;
+
+            for (int i = 2; isContinue; i++)
+            {
+                numberInDegree *= NumberToDegree;
+
+                if (numberInDegree > comparedNumber)
+                {
+                    Console.WriteLine($"Число {numberInDegree} превосходит число {comparedNumber}.\n\nЧисло {numberInDegree} - это число {NumberToDegree} в степени {i}\n");
+                    isContinue = false;
+                }
+            }
+        }
+    }
+}
