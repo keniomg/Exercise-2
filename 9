@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp15
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            const int MinRandomValue = 1;
+            const int MaxRandomValue = 27;
+            const int MaxIncludedRandomValue = MaxRandomValue + 1;
+            const int MinThreeDigitValue = 100;
+            const int MaxThreeDigitValue = 999;
+
+            int multipleNThreeDigitNumber = 0;
+            Random randomNumber = new Random();
+            int dividerN = randomNumber.Next(MinRandomValue, MaxIncludedRandomValue);
+            Console.WriteLine($"Число N = {dividerN}\n");
+
+            for (int i = MinThreeDigitValue; i < MaxThreeDigitValue; i++)
+            {
+                int compareNumber = 0;
+
+                for (int j = 0; j <= int.MaxValue; j++)
+                {
+                    compareNumber += dividerN;
+
+                    if (i == compareNumber)
+                    {
+                        multipleNThreeDigitNumber++;
+                        Console.WriteLine($"\nЧисло {i} кратно числу {dividerN}");
+                        Console.WriteLine($"Теперь чисел, кратных {dividerN}: {multipleNThreeDigitNumber}\n");
+                        break;
+                    }
+                    else if (i < compareNumber)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            Console.WriteLine($"Всего чисел, кратных {dividerN}: {multipleNThreeDigitNumber}");
+        }
+    }
+}
