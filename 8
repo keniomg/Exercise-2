@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp14
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            const string Password = "lox";
+
+            bool isAccesAllowed = false;
+            int tries = 0;
+            int maxTriesValue = 3;
+
+            while (tries != maxTriesValue && isAccesAllowed == false)
+            {
+                Console.WriteLine("Введите пароль:\n");
+                string passwordInput = Console.ReadLine();
+                tries++;
+
+                if (passwordInput == Password)
+                {
+                    isAccesAllowed = true;
+                }
+                else if (passwordInput != Password && tries < maxTriesValue)
+                {
+                    Console.WriteLine("\nВведён неверный пароль\n\nЧтобы попробовать снова, нажмите любую клавишу...\n");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            }
+
+            if (isAccesAllowed)
+            {
+                Console.Clear();
+                Console.WriteLine("Доступ к данным открыт. Ссылка на секретный материал: https://www.youtube.com/watch?v=dQw4w9WgXcQ\n");
+            }
+            else if (!isAccesAllowed)
+            {
+                Console.Clear();
+                Console.WriteLine("Данные заблокированы\n");
+            }
+        }
+    }
+}
