@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -19,19 +20,18 @@ namespace ConsoleApp11
             const string ExitCommand = "exit";
             const string UserAgreeCommand = "да";
             const string UserDisagreeCommand = "нет";
+            const int MinRepeatTimesValue = 1;
+            const int ProgramGuessUserNumberCost = 3;
+            const int RepeatUserMessageCost = 1;
+            const int MixMessageCost = 1;
+            const int UserGuessProgramNumberCost = 1;
+            const int RequiredCoins = 1;
 
             int lostCoins = 0;
             int wonCoins = 0;
-            int minRepeatTimesValue = 1;
-            int programGuessUserNumberCost = 3;
-            int repeatUserMessageCost = 1;
-            int mixMessageCost = 1;
-            int userGuessProgramNumberCost = 1;
-            int userCoins = 3;
             int programNumber = 0;
-            int programGuessNumber = 0;
-            int repeatTimes = 0;
-            int minCoinsToPlay = 1;
+            int repetitionsNumber = 0;
+            int userCoins = 3;
             bool isWorking = true;
             string userMessage = null;
             string userInput = null;
@@ -44,9 +44,10 @@ namespace ConsoleApp11
                 int maxIncludedRandomValue = maxRandomValue - 1;
                 bool isContinue = true;
 
-                if (userCoins < minCoinsToPlay)
+                if (userCoins < RequiredCoins)
                 {
-                    Console.WriteLine("Похоже у вас совсем не осталось монет, приходите позже!");
+                    Console.Clear();
+                    Console.WriteLine("Похоже у вас совсем не осталось монет, приходите позже!\n");
                     isWorking = false;
 
                 }
@@ -61,16 +62,14 @@ namespace ConsoleApp11
                         $"Также введя в консоль соответствующую команду, вы можете:\n" +
                         $"\n{InfoCommand} - узнать подробнее о работе программы" +
                         $"\n{ExitCommand} - выйти из программы\n");
+                    userInput = Console.ReadLine();
+                    Console.Clear();
                 }
-
-                Console.WriteLine();
-                userInput = Console.ReadLine();
-                Console.Clear();
 
                 switch (userInput)
                 {
                     case ProgramGuessUserNumberCommand:
-                        while (userCoins >= programGuessUserNumberCost && isContinue)
+                        while (userCoins >= ProgramGuessUserNumberCost && isContinue)
                         {
                             lostCoins = 3;
                             wonCoins = 1;
@@ -80,17 +79,8 @@ namespace ConsoleApp11
                             
                             if (int.TryParse(userInput, out int userNumber) == false)
                             {
-                                if (userInput == ExitCommand)
-                                {
-                                    isWorking = false;
-                                    isContinue = false;
-                                    Console.Clear();
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nВведено не число!");
-                                    isContinue = false;
-                                }
+                                Console.WriteLine("\nВведено не число!");
+                                isContinue = false;
                             }
                             else if (userNumber < minRandomValue || userNumber > maxIncludedRandomValue)
                             {
@@ -101,8 +91,8 @@ namespace ConsoleApp11
                             else
                             {
                                 Console.Clear();
-                                programGuessNumber = randomNumber.Next(minRandomValue, maxRandomValue);
-                                Console.WriteLine($"Я думаю, ваше число - {programGuessNumber}. Это правильно?\n\n" +
+                                programNumber = randomNumber.Next(minRandomValue, maxRandomValue);
+                                Console.WriteLine($"Я думаю, ваше число - {programNumber}. Это правильно? (введите слово)\n\n" +
                                     $"1 - {UserAgreeCommand}\n\n2 - {UserDisagreeCommand}\n");
                                 userInput = Console.ReadLine();
 
@@ -119,15 +109,9 @@ namespace ConsoleApp11
                                     {
                                         isContinue = true;
                                     }
-                                    else if (userInput == UserDisagreeCommand || userInput == ExitCommand)
+                                    else if (userInput == UserDisagreeCommand)
                                     {
                                         isContinue = false;
-
-                                        if (userInput == ExitCommand)
-                                        {
-                                            isWorking = false;
-                                            Console.WriteLine();
-                                        }
                                     }
                                 }
                                 else if (userInput == UserDisagreeCommand)
@@ -143,44 +127,34 @@ namespace ConsoleApp11
                                     {
                                         isContinue = true;
                                     }
-                                    else if (userInput == UserDisagreeCommand || userInput == ExitCommand)
+                                    else if (userInput == UserDisagreeCommand)
                                     {
                                         isContinue = false;
                                     }
                                 }
-
-                                if (userInput == ExitCommand)
+                                else
                                 {
-                                    isContinue = false;
-                                    isWorking = false;
-                                    Console.Clear();
+                                    Console.WriteLine("\nВведена неверная команда! Чтобы продолжить, нажмите любую клавишу...\n");
+                                    Console.ReadKey();
                                 }
                             }
                         }
 
-                        if (userCoins < programGuessUserNumberCost && isWorking)
+                        if (userCoins < ProgramGuessUserNumberCost)
                         {
                             Console.Clear();
                             Console.WriteLine($"Сейчас у вас монет: {userCoins}\n\nЭтого недостаточно, чтобы сыграть в эту игру," +
                                 $" выберите что-нибудь другое или приходите позже...");
-                            isContinue = false;
                         }
                         break;
 
                     case RepeatMessageCommand:
-                        while (userCoins >= repeatUserMessageCost && isContinue)
+                        while (userCoins >= RepeatUserMessageCost && isContinue)
                         {
                             lostCoins = 1;
                             Console.Clear();
                             Console.WriteLine("Введите сообщение, которое хотите повторить:\n");
                             userMessage = Console.ReadLine();
-
-                            if (userMessage == ExitCommand)
-                            {
-                                isContinue = false;
-                                isWorking = false;
-                                Console.Clear();
-                            }
 
                             if (isContinue)
                             {
@@ -188,27 +162,18 @@ namespace ConsoleApp11
                                 Console.WriteLine("Сколько раз нужно повторить сообщение?");
                                 userInput = Console.ReadLine();
 
-                                if (int.TryParse(userInput, out repeatTimes) == false)
+                                if (int.TryParse(userInput, out repetitionsNumber) == false)
                                 {
-                                    if (userInput == ExitCommand)
-                                    {
-                                        isWorking = false;
-                                        isContinue = false;
-                                        Console.Clear();
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("\nВведено не число!");
-                                        isContinue = false;
-                                    }
+                                    Console.WriteLine("\nВведено не число!");
+                                    isContinue = false;
                                 }
                                 else
                                 {
-                                    if (repeatTimes >= minRepeatTimesValue)
+                                    if (repetitionsNumber >= MinRepeatTimesValue)
                                     {
                                         userCoins -= lostCoins;
 
-                                        for (int i = 0; i <  repeatTimes; i++)
+                                        for (int i = 0; i <  repetitionsNumber; i++)
                                         {
                                             Console.WriteLine($"\n{userMessage}");
                                         }
@@ -221,15 +186,9 @@ namespace ConsoleApp11
                                         {
                                             isContinue = true;
                                         }
-                                        else if (userInput == UserDisagreeCommand || userInput == ExitCommand)
+                                        else if (userInput == UserDisagreeCommand)
                                         {
                                             isContinue = false;
-
-                                            if (userInput == ExitCommand)
-                                            {
-                                                isWorking = false;
-                                                Console.WriteLine();
-                                            }
                                         }
                                     }
                                     else
@@ -241,75 +200,57 @@ namespace ConsoleApp11
                             }
                         }
 
-                        if (userCoins < repeatUserMessageCost && isWorking)
+                        if (userCoins < RepeatUserMessageCost)
                         {
                             Console.Clear();
                             Console.WriteLine($"Сейчас у вас монет: {userCoins}\n\nЭтого недостаточно, чтобы сыграть в эту игру," +
                                 $" выберите что-нибудь другое или приходите позже...");
-                            isContinue = false;
                         }
                         break;
 
                     case MixMessageCommand:
-                        while (userCoins >= mixMessageCost && isContinue)
+                        while (userCoins >= MixMessageCost && isContinue)
                         {
                             lostCoins = 1;
                             Console.Clear();
                             Console.WriteLine("Введите сообщение, которое хотите перемешать:\n");
                             userMessage = Console.ReadLine();
+                            userCoins -= lostCoins;
+                            maxRandomValue = userMessage.Length;
 
-                            if (userMessage == ExitCommand)
+                            for (int i = 0; i < userMessage.Length; i++)
+                            {
+                                StringBuilder changedUserMessage = new StringBuilder(userMessage);
+                                int userMessageRandomLetter = randomNumber.Next(minRandomValue, maxRandomValue);
+                                int mixedWordLetterIndex = userMessageRandomLetter;
+                                changedUserMessage[mixedWordLetterIndex] = userMessage[i];
+                                userMessage = changedUserMessage.ToString();
+                            }
+
+                            Console.WriteLine($"\nВот ваше смешанное сообщение: {userMessage}\nТеперь у вас монет: {userCoins}" +
+                                $"\n\n\n\nЕщё раз? (введите слово)\n\n1 - {UserAgreeCommand}\n\n2 - {UserDisagreeCommand}\n");
+                            userInput = Console.ReadLine();
+
+                            if (userInput == UserAgreeCommand)
+                            {
+                                isContinue = true;
+                            }
+                            else if (userInput == UserDisagreeCommand)
                             {
                                 isContinue = false;
-                                isWorking = false;
-                                Console.Clear();
-                            }
-                            else
-                            {
-                                userCoins -= lostCoins;
-                                maxRandomValue = userMessage.Length;
-
-                                for (int i = 0; i < userMessage.Length; i++)
-                                {
-                                    StringBuilder changeUserMessage = new StringBuilder(userMessage);
-                                    int userMessageRandomLetter = randomNumber.Next(minRandomValue, maxRandomValue);
-                                    int j = userMessageRandomLetter;
-                                    changeUserMessage[j] = userMessage[i];
-                                    userMessage = changeUserMessage.ToString();
-                                }
-
-                                Console.WriteLine($"\nВот ваше смешанное сообщение: {userMessage}\nТеперь у вас монет: {userCoins}" +
-                                    $"\n\n\n\nЕщё раз? (введите слово)\n\n1 - {UserAgreeCommand}\n\n2 - {UserDisagreeCommand}\n");
-                                userInput = Console.ReadLine();
-
-                                if (userInput == UserAgreeCommand)
-                                {
-                                    isContinue = true;
-                                }
-                                else if (userInput == UserDisagreeCommand || userInput == ExitCommand)
-                                {
-                                    isContinue = false;
-
-                                    if (userInput == ExitCommand)
-                                    {
-                                        isWorking = false;
-                                        Console.WriteLine();
-                                    }
-                                }
                             }
                         }
 
-                        if (userCoins < mixMessageCost && isWorking)
+                        if (userCoins < MixMessageCost)
                         {
                             Console.Clear();
                             Console.WriteLine($"Сейчас у вас монет: {userCoins}\n\nЭтого недостаточно, чтобы сыграть в эту игру," +
                                 $" выберите что-нибудь другое или приходите позже...");
-                            isContinue = false;
                         }
                         break;
 
                     case UserGuessProgramNumberCommand:
-                        while (userCoins >= userGuessProgramNumberCost && isContinue)
+                        while (userCoins >= UserGuessProgramNumberCost && isContinue)
                         {
                             lostCoins = 1;
                             wonCoins = 5;
@@ -321,17 +262,9 @@ namespace ConsoleApp11
 
                             if (int.TryParse(userInput, out int userNumber) == false)
                             {
-                                if (userInput == ExitCommand)
-                                {
-                                    isWorking = false;
-                                    isContinue = false;
-                                    Console.Clear();
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nВведено не число!");
-                                    isContinue = false;
-                                }
+                                Console.WriteLine("\nВведено не число!");
+                                isContinue = false;
+
                             }
                             else if (userNumber < minRandomValue || userNumber > maxIncludedRandomValue)
                             {
@@ -356,15 +289,9 @@ namespace ConsoleApp11
                                     {
                                         isContinue = true;
                                     }
-                                    else if (userInput == UserDisagreeCommand || userInput == ExitCommand)
+                                    else if (userInput == UserDisagreeCommand)
                                     {
                                         isContinue = false;
-
-                                        if (userInput == ExitCommand)
-                                        {
-                                            isWorking = false;
-                                            Console.WriteLine();
-                                        }
                                     }
                                 }
                                 else if (userNumber == programNumber)
@@ -379,38 +306,32 @@ namespace ConsoleApp11
                                     {
                                         isContinue = true;
                                     }
-                                    else if (userInput == UserDisagreeCommand || userInput == ExitCommand)
+                                    else if (userInput == UserDisagreeCommand)
                                     {
                                         isContinue = false;
-
-                                        if (userInput == ExitCommand)
-                                        {
-                                            isWorking = false;
-                                            Console.WriteLine();
-                                        }
                                     }
                                 }
                             }
                         }
 
-                        if (userCoins < userGuessProgramNumberCost && isWorking)
+                        if (userCoins < UserGuessProgramNumberCost)
                         {
                             Console.Clear();
                             Console.WriteLine($"Сейчас у вас монет: {userCoins}\n\nЭтого недостаточно, чтобы сыграть в эту игру," +
                                 $" выберите что-нибудь другое или приходите позже...");
-                            isContinue = false;
                         }
                         break;
 
                     case InfoCommand:
+                        Console.Clear();
                         Console.WriteLine($"Для того, чтобы загадать число программе вам необходимо " +
-                            $"иметь как минимум монет: {programGuessUserNumberCost}\n" +
+                            $"иметь как минимум монет: {ProgramGuessUserNumberCost}\n" +
                             $"Для того, чтобы повторить введённое сообщение заданное количество раз," +
-                            $" вам необходимо иметь как минимум монет: {repeatUserMessageCost}\n" +
+                            $" вам необходимо иметь как минимум монет: {RepeatUserMessageCost}\n" +
                             $"Для того, чтобы перемешать введённое сообщение, вам необходимо иметь" +
-                            $" как минимум монет: {mixMessageCost}\n" +
+                            $" как минимум монет: {MixMessageCost}\n" +
                             $"Для того, чтобы попробовать отгадать число программы, вам необходимо" +
-                            $" иметь как минимум монет: {userGuessProgramNumberCost}\n");
+                            $" иметь как минимум монет: {UserGuessProgramNumberCost}\n");
                         break;
 
                     case ExitCommand:
