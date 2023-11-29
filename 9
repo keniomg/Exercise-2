@@ -21,25 +21,13 @@ namespace ConsoleApp15
             int dividerN = randomNumber.Next(MinRandomValue, MaxIncludedRandomValue);
             Console.WriteLine($"Число N = {dividerN}\n");
 
-            for (int i = MinThreeDigitValue; i < MaxThreeDigitValue; i++)
+            for (int i = 0; i < MaxThreeDigitValue; i += dividerN)
             {
-                int compareNumber = 0;
-
-                for (int j = 0; j <= int.MaxValue; j++)
+                if (i >= MinThreeDigitValue)
                 {
-                    compareNumber += dividerN;
-
-                    if (i == compareNumber)
-                    {
-                        multipleNThreeDigitNumber++;
-                        Console.WriteLine($"\nЧисло {i} кратно числу {dividerN}");
-                        Console.WriteLine($"Теперь чисел, кратных {dividerN}: {multipleNThreeDigitNumber}\n");
-                        break;
-                    }
-                    else if (i < compareNumber)
-                    {
-                        break;
-                    }
+                    multipleNThreeDigitNumber++;
+                    Console.WriteLine($"\nЧисло {i} кратно числу {dividerN}");
+                    Console.WriteLine($"Теперь чисел, кратных {dividerN}: {multipleNThreeDigitNumber}\n");
                 }
             }
 
