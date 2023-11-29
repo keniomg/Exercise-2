@@ -10,20 +10,18 @@ namespace ConsoleApp15
     {
         static void Main(string[] args)
         {
-            const int MinRandomValue = 1;
-            const int MaxRandomValue = 27;
-            const int MaxIncludedRandomValue = MaxRandomValue + 1;
-            const int MinThreeDigitValue = 100;
-            const int MaxThreeDigitValue = 999;
-
+            int minRandomValue = 1;
+            int maxRandomValue = 27;
+            int minDividingRangeValue = 100;
+            int maxDividingRangeValue = 999;
             int multipleNThreeDigitNumber = 0;
-            Random randomNumber = new Random();
-            int dividerN = randomNumber.Next(MinRandomValue, MaxIncludedRandomValue);
+            Random random = new Random();
+            int dividerN = random.Next(minRandomValue, maxRandomValue + 1);
             Console.WriteLine($"Число N = {dividerN}\n");
 
-            for (int i = 0; i < MaxThreeDigitValue; i += dividerN)
+            for (int i = 0; i <= maxDividingRangeValue; i += dividerN)
             {
-                if (i >= MinThreeDigitValue)
+                if (i >= minDividingRangeValue)
                 {
                     multipleNThreeDigitNumber++;
                     Console.WriteLine($"\nЧисло {i} кратно числу {dividerN}");
