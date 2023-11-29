@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp17
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            char leftBracket = '(';
+            char rightBracket = ')';
+            int bracketDepth = 0;
+            int notClosedBracket = 0;
+            bool isContinue = true;
+            Console.WriteLine("Чтобы определить степень глубины скобочного выражения, " +
+                "введите корректное скобочное выражение:\n");
+            string userInput = Console.ReadLine();
+
+            for (int i = 0; i < userInput.Length; i++)
+            {
+                if (userInput[i] == leftBracket)
+                {
+                    notClosedBracket++;
+                }
+                else if (userInput[i] == rightBracket)
+                {
+                    notClosedBracket--;
+                }
+
+                if (notClosedBracket < 0)
+                {
+                    isContinue = false;
+                    break;
+                }
+
+                if (notClosedBracket > bracketDepth)
+                {
+                    bracketDepth = notClosedBracket;
+                }
+            }
+
+            if (bracketDepth == 0 || notClosedBracket > 0)
+            {
+                Console.WriteLine("\nВведено некорректное выражение!\n");
+                isContinue = false;
+            }
+            else if (isContinue)
+            {
+                Console.WriteLine($"\nМаксимальная глубина скобочного выражения: {bracketDepth}\n");
+            }
+        }
+    }
+}
