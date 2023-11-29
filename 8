@@ -13,22 +13,21 @@ namespace ConsoleApp14
             const string Password = "lox";
 
             bool isAccesAllowed = false;
-            int tries = 0;
             int maxTriesValue = 3;
 
-            while (tries != maxTriesValue && isAccesAllowed == false)
+            for (int i = 0; i < maxTriesValue; i++)
             {
                 Console.WriteLine("Введите пароль:\n");
                 string passwordInput = Console.ReadLine();
-                tries++;
 
                 if (passwordInput == Password)
                 {
                     isAccesAllowed = true;
+                    break;
                 }
-                else if (passwordInput != Password && tries < maxTriesValue)
+                else if ((passwordInput == Password) == false && i < maxTriesValue)
                 {
-                    Console.WriteLine("\nВведён неверный пароль\n\nЧтобы попробовать снова, нажмите любую клавишу...\n");
+                    Console.WriteLine("\nВведён неверный пароль\n\nНажмите любую клавишу...\n");
                     Console.ReadKey();
                     Console.Clear();
                 }
@@ -39,7 +38,7 @@ namespace ConsoleApp14
                 Console.Clear();
                 Console.WriteLine("Доступ к данным открыт. Ссылка на секретный материал: https://www.youtube.com/watch?v=dQw4w9WgXcQ\n");
             }
-            else if (!isAccesAllowed)
+            else
             {
                 Console.Clear();
                 Console.WriteLine("Данные заблокированы\n");
