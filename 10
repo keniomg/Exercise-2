@@ -12,22 +12,25 @@ namespace ConsoleApp16
         {
             const int MinRandomValue = 0;
             const int MaxRandomValue = 100;
-            const int NumberToDegree = 2;
-            const int StartDegree = 2;
+            const int BaseNumber = 2;
 
-            bool isContinue = true;
+            Convert.ToDouble(BaseNumber);
             Random randomNumber = new Random();
             int comparedNumber = randomNumber.Next(MinRandomValue, MaxRandomValue);
             Console.WriteLine($"Наше случайное число: {comparedNumber}\n");
-            int numberInDegree = NumberToDegree;
+            double numberInDegree;
+            double exponent;
+            bool isContinue = true;
 
-            for (int i = StartDegree; isContinue; i++)
+            for (int i = 0; isContinue; i++)
             {
-                numberInDegree *= NumberToDegree;
+                exponent = Convert.ToDouble(i);
+                numberInDegree = Math.Pow(BaseNumber, exponent);
 
                 if (numberInDegree > comparedNumber)
                 {
-                    Console.WriteLine($"Число {numberInDegree} превосходит число {comparedNumber}.\n\nЧисло {numberInDegree} - это число {NumberToDegree} в степени {i}\n");
+                    Console.WriteLine($"Минимальная степень, в которой число {BaseNumber} превосходит число {comparedNumber} - {i}. " +
+                        $"{BaseNumber} в степени {i} = {numberInDegree}\n");
                     isContinue = false;
                 }
             }
