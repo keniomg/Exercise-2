@@ -10,22 +10,18 @@ namespace ConsoleApp13
     {
         static void Main(string[] args)
         {
-            const int BordersThickness = 1;
-            const int NumberWidthBorders = 2;
-
             string border = null;
             Console.WriteLine("Введите ваше имя:\n");
             string userName = Console.ReadLine();
             Console.Clear();
             Console.WriteLine("Введите символ, используемый для обрамления вашего имени:\n");
-            char bordersCharacter = Convert.ToChar(Console.ReadLine());
+            char bordersCharacter = Console.ReadKey(true).KeyChar;
             Console.Clear();
-            int bordersWidth = userName.Length + BordersThickness*NumberWidthBorders;
             string stringWithName = $"{bordersCharacter}{userName}{bordersCharacter}";
 
             for (int i = 0; i < stringWithName.Length; i++)
             {
-                border = bordersCharacter+border;
+                border += bordersCharacter;
             }
 
             Console.WriteLine(border);
