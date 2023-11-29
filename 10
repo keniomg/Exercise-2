@@ -13,14 +13,15 @@ namespace ConsoleApp16
             const int MinRandomValue = 0;
             const int MaxRandomValue = 100;
             const int NumberToDegree = 2;
+            const int StartDegree = 2;
 
             bool isContinue = true;
             Random randomNumber = new Random();
             int comparedNumber = randomNumber.Next(MinRandomValue, MaxRandomValue);
             Console.WriteLine($"Наше случайное число: {comparedNumber}\n");
-            int numberInDegree = 2;
+            int numberInDegree = NumberToDegree;
 
-            for (int i = 2; isContinue; i++)
+            for (int i = StartDegree; isContinue; i++)
             {
                 numberInDegree *= NumberToDegree;
 
