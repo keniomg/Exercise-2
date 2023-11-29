@@ -10,27 +10,25 @@ namespace ConsoleApp16
     {
         static void Main(string[] args)
         {
-            const int MinRandomValue = 0;
-            const int MaxRandomValue = 100;
-            const int BaseNumber = 2;
-
-            Convert.ToDouble(BaseNumber);
-            Random randomNumber = new Random();
-            int comparedNumber = randomNumber.Next(MinRandomValue, MaxRandomValue);
-            Console.WriteLine($"Наше случайное число: {comparedNumber}\n");
+            Random random = new Random();
+            double baseNumber = 2;
             double numberInDegree;
             double exponent;
+            int minRandomValue = 0;
+            int maxRandomValue = 100;
+            int comparedNumber = random.Next(minRandomValue, maxRandomValue);
+            Console.WriteLine($"Наше случайное число: {comparedNumber}\n");
             bool isContinue = true;
 
             for (int i = 0; isContinue; i++)
             {
                 exponent = Convert.ToDouble(i);
-                numberInDegree = Math.Pow(BaseNumber, exponent);
+                numberInDegree = Math.Pow(baseNumber, exponent);
 
                 if (numberInDegree > comparedNumber)
                 {
-                    Console.WriteLine($"Минимальная степень, в которой число {BaseNumber} превосходит число {comparedNumber} - {i}. " +
-                        $"{BaseNumber} в степени {i} = {numberInDegree}\n");
+                    Console.WriteLine($"Минимальная степень, в которой число {baseNumber} превосходит число {comparedNumber} - {i}. " +
+                        $"{baseNumber} в степени {i} = {numberInDegree}\n");
                     isContinue = false;
                 }
             }
