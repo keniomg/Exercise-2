@@ -13,7 +13,7 @@ namespace ConsoleApp13
             const int BordersThickness = 1;
             const int NumberWidthBorders = 2;
 
-            string heightBorder = null;
+            string border = null;
             Console.WriteLine("Введите ваше имя:\n");
             string userName = Console.ReadLine();
             Console.Clear();
@@ -21,15 +21,16 @@ namespace ConsoleApp13
             char bordersCharacter = Convert.ToChar(Console.ReadLine());
             Console.Clear();
             int bordersWidth = userName.Length + BordersThickness*NumberWidthBorders;
+            string stringWithName = $"{bordersCharacter}{userName}{bordersCharacter}";
 
-            for (int i = 0; i < bordersWidth; i++)
+            for (int i = 0; i < stringWithName.Length; i++)
             {
-                heightBorder = bordersCharacter+heightBorder;
+                border = bordersCharacter+border;
             }
 
-            Console.WriteLine(heightBorder);
-            Console.WriteLine($"{bordersCharacter}{userName}{bordersCharacter}");
-            Console.WriteLine(heightBorder + "\n");
+            Console.WriteLine(border);
+            Console.WriteLine(stringWithName);
+            Console.WriteLine(border + "\n");
         }
     }
 }
