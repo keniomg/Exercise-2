@@ -12,9 +12,8 @@ namespace ConsoleApp17
         {
             char leftBracket = '(';
             char rightBracket = ')';
-            int bracketDepth = 0;
-            int notClosedBracket = 0;
-            bool isContinue = true;
+            int maximumBracketDepth = 0;
+            int currentBracketDepth = 0;
             Console.WriteLine("Чтобы определить степень глубины скобочного выражения, " +
                 "введите корректное скобочное выражение:\n");
             string userInput = Console.ReadLine();
@@ -23,33 +22,31 @@ namespace ConsoleApp17
             {
                 if (userInput[i] == leftBracket)
                 {
-                    notClosedBracket++;
+                    currentBracketDepth++;
                 }
                 else if (userInput[i] == rightBracket)
                 {
-                    notClosedBracket--;
+                    currentBracketDepth--;
                 }
 
-                if (notClosedBracket < 0)
+                if (currentBracketDepth < 0)
                 {
-                    isContinue = false;
                     break;
                 }
 
-                if (notClosedBracket > bracketDepth)
+                if (currentBracketDepth > maximumBracketDepth)
                 {
-                    bracketDepth = notClosedBracket;
+                    maximumBracketDepth = currentBracketDepth;
                 }
             }
 
-            if (bracketDepth == 0 || (notClosedBracket == 0) == false)
+            if (maximumBracketDepth == 0 || (currentBracketDepth == 0) == false)
             {
                 Console.WriteLine("\nВведено некорректное выражение!\n");
-                isContinue = false;
             }
-            else if (isContinue)
+            else
             {
-                Console.WriteLine($"\nМаксимальная глубина скобочного выражения: {bracketDepth}\n");
+                Console.WriteLine($"\nМаксимальная глубина скобочного выражения: {maximumBracketDepth}\n");
             }
         }
     }
