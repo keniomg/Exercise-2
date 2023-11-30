@@ -23,22 +23,22 @@ namespace ConsoleApp18
             int fireBallSpellDamage = 250;
             int frostBallSpellDamage = 125;
             int fingerOfDeathSpellDamage = 650;
-            int bossHP = 1250;
-            int currentPlayerHP = 800;
-            int maxPlayerHP = 800;
-            int tempPlayerHP = 0;
+            int bossHp = 1250;
+            int currentPlayerHp = 800;
+            int maxPlayerHp = 800;
+            int tempPlayerHp = 0;
             Random random = new Random();
 
-            while (bossHP > 0 && currentPlayerHP > 0)
+            while (bossHp > 0 && currentPlayerHp > 0)
             {
                 bool isHealingSpell = false;
                 bool isBossFrosted = false;
                 bool isMissClick = false;
-                int healedHP = 250;
+                int healedHp = 250;
                 int playerDamage = 0;
                 int bossDamage = random.Next(minBossDamageValue, maxBossDamageValue);
                 Console.SetCursorPosition(4, 1);
-                Console.WriteLine($"Ваше текущее здоровье: {currentPlayerHP}\t\tТекущее здоровье противника: {bossHP}");
+                Console.WriteLine($"Ваше текущее здоровье: {currentPlayerHp}\t\tТекущее здоровье противника: {bossHp}");
                 Console.SetCursorPosition(4, 15);
                 Console.WriteLine($"Вы можете использовать следующие способности по нажатию соответствующих кнопок:\n" +
                     $"\n\n{healingTouchKey} - целебное касание (восстановить себе {healingTouchSpellHPRegen} ед. здоровья)" +
@@ -54,7 +54,7 @@ namespace ConsoleApp18
                 switch (charKey.Key)
                 {
                     case ConsoleKey.Q:
-                        tempPlayerHP = currentPlayerHP + healingTouchSpellHPRegen;
+                        tempPlayerHp = currentPlayerHp + healingTouchSpellHPRegen;
                         isHealingSpell = true;
                         break;
 
@@ -79,47 +79,44 @@ namespace ConsoleApp18
                         isMissClick = true;
                         break;
                 }
-                
+
                 if (isMissClick)
                 {
                     Console.WriteLine("Похоже, вы не попали по нужной клавише и теперь пропускаете ход!");
                 }
                 else if (isHealingSpell)
                 {
-                    if (tempPlayerHP > maxPlayerHP)
+                    if (tempPlayerHp > maxPlayerHp)
                     {
-                        healedHP = healedHP - (tempPlayerHP - maxPlayerHP);
-                        currentPlayerHP = maxPlayerHP;
-                        Console.WriteLine($"Вы восстановили себе {healedHP} ед. здоровья, и теперь у вас {currentPlayerHP} ед. здоровья!");
+                        healedHp = healedHp - (tempPlayerHp - maxPlayerHp);
+                        currentPlayerHp = maxPlayerHp;
                     }
                     else
                     {
-                        currentPlayerHP += healedHP;
-                        Console.WriteLine($"Вы восстановили себе {healedHP} ед. здоровья, и теперь у вас {currentPlayerHP} ед. здоровья!");
+                        currentPlayerHp += healedHp;
                     }
+
+                    Console.WriteLine($"Вы восстановили себе {healedHp} ед. здоровья, и теперь у вас {currentPlayerHp} ед. здоровья!");
                 }
                 else
                 {
-                    bossHP -= playerDamage;
+                    bossHp -= playerDamage;
 
-                    if (bossHP > 0)
+                    if (bossHp < 0)
                     {
-                        Console.WriteLine($"Вы нанесли противнику {playerDamage} ед. урона, и у него осталось {bossHP} ед. здоровья!");
+                        bossHp = 0;
                     }
-                    else
-                    {
-                        bossHP = 0;
-                        Console.WriteLine($"Вы нанесли противнику {playerDamage} ед. урона, после чего у него осталось {bossHP} ед. здоровья, и он погиб!");
-                    }
+                    
+                    Console.WriteLine($"Вы нанесли противнику {playerDamage} ед. урона, и у него осталось {bossHp} ед. здоровья!");
                 }
 
                 Console.SetCursorPosition(4, 6);
+                Console.ForegroundColor = ConsoleColor.Yellow;
 
-                if (bossHP > 0)
+                if (bossHp > 0)
                 {
                     if (isBossFrosted)
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Противник заморожен и пропускает ход! Чтобы закончить свой ход, нажмите любую клавишу...\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.SetCursorPosition(85, 15);
@@ -127,39 +124,47 @@ namespace ConsoleApp18
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Чтобы закончить свой ход, нажмите любую клавишу...\n");
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.SetCursorPosition(85, 15);
                         Console.ReadKey();
                         Console.SetCursorPosition(4, 4);
                         Console.Write(new string(' ', Console.BufferWidth));
-                        currentPlayerHP -= bossDamage;
+                        currentPlayerHp -= bossDamage;
                         Console.SetCursorPosition(4, 4);
-                        Console.ForegroundColor= ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Red;
 
-                        if (currentPlayerHP > 0)
+                        if (currentPlayerHp <0)
                         {
-                            Console.Write($"Противник нанёс вам {bossDamage} ед. урона," +
-                                $" и теперь у вас {currentPlayerHP} ед. здоровья!");
+                            currentPlayerHp = 0;
                         }
-                        else
-                        {
-                            currentPlayerHP = 0;
-                            Console.Write($"Противник нанёс вам {bossDamage} ед. урона, " +
-                                $"после чего у вас осталось {currentPlayerHP} ед. здоровья, и вы погибли!");
-                            Console.SetCursorPosition(4, 6);
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine("Вы проиграли! Чтобы закончить игру, нажмите любую клавишу...\n");
-                            isContinue = false;
-                        }
+                        
+                        Console.Write($"Противник нанёс вам {bossDamage} ед. урона," +
+                            $" и теперь у вас {currentPlayerHp} ед. здоровья!");
                     }
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    isContinue = false;
+                }
+
+                Console.SetCursorPosition(4, 6);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+
+                if (bossHp > 0 && currentPlayerHp == 0)
+                {
+                    Console.WriteLine("Вы проиграли! Чтобы закончить игру, нажмите любую клавишу...\n");
+                    isContinue = false;
+                }
+                else if (bossHp == 0 && currentPlayerHp > 0)
+                {
                     Console.WriteLine("Вы победили! Чтобы закончить игру, нажмите любую клавишу...\n");
-                    isContinue = false; 
+                    isContinue = false;
+                }
+                else if (bossHp == 0 && currentPlayerHp == 0)
+                {
+                    Console.WriteLine("Ничья! Чтобы закончить игру, нажмите любую клавишу...\n");
+                    isContinue = false;
                 }
 
                 if (isContinue)
