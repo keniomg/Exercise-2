@@ -13,25 +13,20 @@ namespace ConsoleApp16
             Random random = new Random();
             double baseNumber = 2;
             double numberInDegree;
-            double exponent;
+            double exponent = 0;
             int minRandomValue = 0;
             int maxRandomValue = 100;
             int comparedNumber = random.Next(minRandomValue, maxRandomValue);
             Console.WriteLine($"Наше случайное число: {comparedNumber}\n");
-            bool isContinue = true;
+            numberInDegree = Math.Pow(baseNumber, exponent);
 
-            for (int i = 0; isContinue; i++)
+            for (exponent = 0; numberInDegree <= comparedNumber; exponent++)
             {
-                exponent = Convert.ToDouble(i);
-                numberInDegree = Math.Pow(baseNumber, exponent);
-
-                if (numberInDegree > comparedNumber)
-                {
-                    Console.WriteLine($"Минимальная степень, в которой число {baseNumber} превосходит число {comparedNumber} - {i}. " +
-                        $"{baseNumber} в степени {i} = {numberInDegree}\n");
-                    isContinue = false;
-                }
+                numberInDegree *= baseNumber;
             }
+
+            Console.WriteLine($"Минимальная степень, в которой число {baseNumber} превосходит число {comparedNumber} - {exponent}. " +
+                $"\n\n{baseNumber} в степени {exponent} = {numberInDegree}\n");
         }
     }
 }
